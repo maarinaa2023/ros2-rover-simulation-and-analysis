@@ -12,6 +12,8 @@ Special attention was given to the hierarchy and pivot placement of each compone
 
 <img width="803" height="743" alt="imagen" src="https://github.com/user-attachments/assets/d9ecc4c4-e3db-4241-9df8-569216afda47" />
 
+
+
 The rover includes:
 
 * Independent wheel modules
