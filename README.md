@@ -106,3 +106,15 @@ The peaks detected on the X and Y axes (around 250, 320, 350 and 520 seconds) co
 **3. Energy Efficiency (Power Consumption vs. Time) :** The third graph shows the Potential Power Consumption calculated as _|velocity \times force|_. It can be seen that the total power consumption (white line) has peaks of high energy demand just as the cmd_vel.vx signal (red dotted line) changes abruptly. 
 Between seconds 250 and 500, power consumption is intermittent and high, reflecting the motors’ effort to move the robot’s weight along with the load (the cubes) and perform turning manoeuvres that require greater torque.
 
+
+Below are some images that illustrate the points made:
+
+
+<img width="1087" height="848" alt="imagen" src="https://github.com/user-attachments/assets/428719b7-7e11-4f2b-b5a6-049a290ea24e" />
+
+<img width="469" height="338" alt="Captura desde 2026-05-07 09-58-12" src="https://github.com/user-attachments/assets/491c557b-20b4-48f3-8f0b-5c2c7c4225d7" />
+
+<img width="477" height="430" alt="Captura desde 2026-05-07 10-53-02" src="https://github.com/user-attachments/assets/c05a1320-50b2-4f52-a4f4-d6db985f0323" />
+
+
+
