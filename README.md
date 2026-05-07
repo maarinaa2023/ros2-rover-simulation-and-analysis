@@ -114,5 +114,8 @@ Below are some images that illustrate the points made:
 
 <img width="477" height="430" alt="Captura desde 2026-05-07 10-53-02" src="https://github.com/user-attachments/assets/c05a1320-50b2-4f52-a4f4-d6db985f0323" />
 
+<img width="379" height="365" alt="Screenshot from 2026-05-07 15-54-16" src="https://github.com/user-attachments/assets/7a731dab-72a0-47d1-870e-d724d6da1ae9" />
+
+<img width="379" height="365" alt="Screenshot from 2026-05-07 15-54-31" src="https://github.com/user-attachments/assets/20af6e29-2924-48f2-8f56-c262ff7a244a" />
 
 
