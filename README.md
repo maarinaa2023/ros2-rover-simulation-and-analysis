@@ -92,10 +92,10 @@ The results obtained are as follows:
 
 
 **1. Motion Analysis (Wheel Position vs. Time) :** 
-**0s – 250s:** The robot remains largely stationary or performs very fine adjustment movements. The positions of the wheel joints remain close to 0 rad.
-**250s – 300s:** The first significant movement is observed. The wheels (particularly Wheel1, Wheel2 and Wheel3) begin a continuous rotation towards negative values, indicating constant linear movement.
-**400s – 450s:** There is a fluctuation in the position of the wheels coinciding with precision manoeuvres. It is likely that at this point the robot was positioning itself to interact with the cubes. 
-**500s onwards:** A very steep slope is recorded on the position graph (reaching -60 rad), suggesting movement at a constant speed towards the final target or return zone. 
+* **0s – 250s:** The robot remains largely stationary or performs very fine adjustment movements. The positions of the wheel joints remain close to 0 rad.
+* **250s – 300s:** The first significant movement is observed. The wheels (particularly Wheel1, Wheel2 and Wheel3) begin a continuous rotation towards negative values, indicating constant linear movement.
+* **400s – 450s:** There is a fluctuation in the position of the wheels coinciding with precision manoeuvres. It is likely that at this point the robot was positioning itself to interact with the cubes. 
+* **500s onwards:** A very steep slope is recorded on the position graph (reaching -60 rad), suggesting movement at a constant speed towards the final target or return zone. 
 
 **2. Dynamics and Acceleration (IMU) :** 
 The Linear Acceleration graph shows a constant value on the Z-axis (~9.8 m/s²), corresponding to the force of gravity acting on the sensor. 
