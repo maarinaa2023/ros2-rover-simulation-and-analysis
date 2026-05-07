@@ -1,0 +1,314 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--This does not replace URDF, and is not an extension of URDF.
+    This is a format for representing semantic information about the robot structure.
+    A URDF file must exist for this robot as well, where the joints and the links that are referenced are defined
+-->
+<robot name="rover">
+    <!--GROUPS: Representation of a set of joints and links. This can be useful for specifying DOF to plan for, defining arms, end effectors, etc-->
+    <!--LINKS: When a link is specified, the parent joint of that link (if it exists) is automatically included-->
+    <!--JOINTS: When a joint is specified, the child link of that joint (which will always exist) is automatically included-->
+    <!--CHAINS: When a chain is specified, all the links along the chain (including endpoints) are included in the group. Additionally, all the joints that are parents to included links are also included. This means that joints along the chain and the parent joint of the base link are included in the group-->
+    <!--SUBGROUPS: Groups can also be formed by referencing to already defined group names-->
+    <group name="scara">
+        <link name="PinzaBase_link"/>
+        <link name="PinzaBarra_link"/>
+        <link name="L1Barra_link"/>
+        <link name="Cylinder_link"/>
+        <link name="L2Barra_link"/>
+        <link name="CilindroPinza1_link"/>
+        <link name="AjustaAlturaPinza_link"/>
+        <joint name="PinzaBase_link_joint"/>
+        <joint name="PinzaBarra_link_joint"/>
+        <joint name="L1Barra_link_joint"/>
+        <joint name="Cylinder_link_joint"/>
+        <joint name="L2Barra_link_joint"/>
+        <joint name="CilindroPinza1_link_joint"/>
+        <joint name="AjustaAlturaPinza_link_joint"/>
+        <chain base_link="PinzaBase_link" tip_link="AjustaAlturaPinza_link"/>
+    </group>
+    <group name="gripper">
+        <link name="CilindroPinza2_link"/>
+        <link name="Pinza1_link"/>
+        <link name="Pinza2_link"/>
+        <joint name="CilindroPinza2_link_joint"/>
+        <joint name="Pinza1_link_joint"/>
+        <joint name="Pinza2_link_joint"/>
+    </group>
+    <!--GROUP STATES: Purpose: Define a named state for a particular group, in terms of joint values. This is useful to define states like 'folded arms'-->
+    <group_state name="open" group="gripper">
+        <joint name="Pinza1_link_joint" value="-0.0381"/>
+        <joint name="Pinza2_link_joint" value="-0.0381"/>
+    </group_state>
+    <group_state name="close" group="gripper">
+        <joint name="Pinza1_link_joint" value="0.0414"/>
+        <joint name="Pinza2_link_joint" value="0.0414"/>
+    </group_state>
+    <group_state name="place" group="scara">
+        <joint name="AjustaAlturaPinza_link_joint" value="-0.1"/>
+        <joint name="CilindroPinza1_link_joint" value="0"/>
+        <joint name="Cylinder_link_joint" value="0"/>
+        <joint name="PinzaBarra_link_joint" value="0"/>
+    </group_state>
+    <group_state name="hold" group="scara">
+        <joint name="AjustaAlturaPinza_link_joint" value="0.4323"/>
+        <joint name="CilindroPinza1_link_joint" value="0"/>
+        <joint name="Cylinder_link_joint" value="0"/>
+        <joint name="PinzaBarra_link_joint" value="-3.14"/>
+    </group_state>
+    <group_state name="target" group="scara">
+        <joint name="AjustaAlturaPinza_link_joint" value="-0.5608"/>
+        <joint name="CilindroPinza1_link_joint" value="0"/>
+        <joint name="Cylinder_link_joint" value="0"/>
+        <joint name="PinzaBarra_link_joint" value="-3.14"/>
+    </group_state>
+    <group_state name="lobby" group="scara">
+        <joint name="AjustaAlturaPinza_link_joint" value="0.4323"/>
+        <joint name="CilindroPinza1_link_joint" value="0"/>
+        <joint name="Cylinder_link_joint" value="0"/>
+        <joint name="PinzaBarra_link_joint" value="0"/>
+    </group_state>
+    <group_state name="turn" group="scara">
+        <joint name="AjustaAlturaPinza_link_joint" value="0.4323"/>
+        <joint name="CilindroPinza1_link_joint" value="0.5"/>
+        <joint name="Cylinder_link_joint" value="0"/>
+        <joint name="PinzaBarra_link_joint" value="-3.14"/>
+    </group_state>
+    <group_state name="target_turn" group="scara">
+        <joint name="AjustaAlturaPinza_link_joint" value="-0.5608"/>
+        <joint name="CilindroPinza1_link_joint" value="0.5"/>
+        <joint name="Cylinder_link_joint" value="0"/>
+        <joint name="PinzaBarra_link_joint" value="-3.14"/>
+    </group_state>
+    <!--END EFFECTOR: Purpose: Represent information about an end effector.-->
+    <end_effector name="gripper" parent_link="AjustaAlturaPinza_link" group="gripper" parent_group="scara"/>
+    <!--DISABLE COLLISIONS: By default it is assumed that any link of the robot could potentially come into collision with any other link in the robot. This tag disables collision checking between a specified pair of links. -->
+    <disable_collisions link1="AjustaAlturaPinza_link" link2="CilindroPinza1_link" reason="Adjacent"/>
+    <disable_collisions link1="AjustaAlturaPinza_link" link2="CilindroPinza2_link" reason="Adjacent"/>
+    <disable_collisions link1="AjustaAlturaPinza_link" link2="Cylinder_link" reason="Never"/>
+    <disable_collisions link1="AjustaAlturaPinza_link" link2="L1Barra_link" reason="Never"/>
+    <disable_collisions link1="AjustaAlturaPinza_link" link2="L2Barra_link" reason="Default"/>
+    <disable_collisions link1="AjustaAlturaPinza_link" link2="Pared1_link" reason="Never"/>
+    <disable_collisions link1="AjustaAlturaPinza_link" link2="Pinza1_link" reason="Never"/>
+    <disable_collisions link1="AjustaAlturaPinza_link" link2="Pinza2_link" reason="Never"/>
+    <disable_collisions link1="AjustaAlturaPinza_link" link2="PinzaBarra_link" reason="Never"/>
+    <disable_collisions link1="AjustaAlturaPinza_link" link2="PinzaBase_link" reason="Never"/>
+    <disable_collisions link1="AjustaAlturaPinza_link" link2="Rueda1Izq_link" reason="Never"/>
+    <disable_collisions link1="AjustaAlturaPinza_link" link2="Rueda3Drcha_link" reason="Never"/>
+    <disable_collisions link1="AjustaAlturaPinza_link" link2="Rueda3Izq_link" reason="Never"/>
+    <disable_collisions link1="Axis1_link" link2="Axis2_link" reason="Never"/>
+    <disable_collisions link1="Axis1_link" link2="Axis3_link" reason="Never"/>
+    <disable_collisions link1="Axis1_link" link2="Base_link" reason="Adjacent"/>
+    <disable_collisions link1="Axis1_link" link2="CilindroPinza1_link" reason="Never"/>
+    <disable_collisions link1="Axis1_link" link2="Cylinder_link" reason="Never"/>
+    <disable_collisions link1="Axis1_link" link2="L1Barra_link" reason="Never"/>
+    <disable_collisions link1="Axis1_link" link2="L2Barra_link" reason="Never"/>
+    <disable_collisions link1="Axis1_link" link2="Pared1_link" reason="Never"/>
+    <disable_collisions link1="Axis1_link" link2="Pared2_link" reason="Never"/>
+    <disable_collisions link1="Axis1_link" link2="Pared3_link" reason="Never"/>
+    <disable_collisions link1="Axis1_link" link2="Pared4_link" reason="Never"/>
+    <disable_collisions link1="Axis1_link" link2="PinzaBarra_link" reason="Never"/>
+    <disable_collisions link1="Axis1_link" link2="PinzaBase_link" reason="Never"/>
+    <disable_collisions link1="Axis1_link" link2="Rueda1Drcha_link" reason="Adjacent"/>
+    <disable_collisions link1="Axis1_link" link2="Rueda1Izq_link" reason="Adjacent"/>
+    <disable_collisions link1="Axis1_link" link2="Rueda2Drcha_link" reason="Never"/>
+    <disable_collisions link1="Axis1_link" link2="Rueda2Izq_link" reason="Never"/>
+    <disable_collisions link1="Axis1_link" link2="Rueda3Drcha_link" reason="Never"/>
+    <disable_collisions link1="Axis1_link" link2="Rueda3Izq_link" reason="Never"/>
+    <disable_collisions link1="Axis2_link" link2="Axis3_link" reason="Never"/>
+    <disable_collisions link1="Axis2_link" link2="Base_link" reason="Adjacent"/>
+    <disable_collisions link1="Axis2_link" link2="CilindroPinza1_link" reason="Never"/>
+    <disable_collisions link1="Axis2_link" link2="Cylinder_link" reason="Never"/>
+    <disable_collisions link1="Axis2_link" link2="L1Barra_link" reason="Never"/>
+    <disable_collisions link1="Axis2_link" link2="L2Barra_link" reason="Never"/>
+    <disable_collisions link1="Axis2_link" link2="Pared1_link" reason="Never"/>
+    <disable_collisions link1="Axis2_link" link2="Pared2_link" reason="Never"/>
+    <disable_collisions link1="Axis2_link" link2="Pared3_link" reason="Never"/>
+    <disable_collisions link1="Axis2_link" link2="Pared4_link" reason="Never"/>
+    <disable_collisions link1="Axis2_link" link2="PinzaBarra_link" reason="Never"/>
+    <disable_collisions link1="Axis2_link" link2="PinzaBase_link" reason="Never"/>
+    <disable_collisions link1="Axis2_link" link2="Rueda1Drcha_link" reason="Never"/>
+    <disable_collisions link1="Axis2_link" link2="Rueda1Izq_link" reason="Never"/>
+    <disable_collisions link1="Axis2_link" link2="Rueda2Drcha_link" reason="Adjacent"/>
+    <disable_collisions link1="Axis2_link" link2="Rueda2Izq_link" reason="Adjacent"/>
+    <disable_collisions link1="Axis2_link" link2="Rueda3Drcha_link" reason="Never"/>
+    <disable_collisions link1="Axis2_link" link2="Rueda3Izq_link" reason="Never"/>
+    <disable_collisions link1="Axis3_link" link2="Base_link" reason="Adjacent"/>
+    <disable_collisions link1="Axis3_link" link2="CilindroPinza1_link" reason="Never"/>
+    <disable_collisions link1="Axis3_link" link2="Cylinder_link" reason="Never"/>
+    <disable_collisions link1="Axis3_link" link2="L1Barra_link" reason="Never"/>
+    <disable_collisions link1="Axis3_link" link2="L2Barra_link" reason="Never"/>
+    <disable_collisions link1="Axis3_link" link2="Pared1_link" reason="Never"/>
+    <disable_collisions link1="Axis3_link" link2="Pared2_link" reason="Never"/>
+    <disable_collisions link1="Axis3_link" link2="Pared3_link" reason="Never"/>
+    <disable_collisions link1="Axis3_link" link2="Pared4_link" reason="Never"/>
+    <disable_collisions link1="Axis3_link" link2="PinzaBarra_link" reason="Never"/>
+    <disable_collisions link1="Axis3_link" link2="PinzaBase_link" reason="Never"/>
+    <disable_collisions link1="Axis3_link" link2="Rueda1Drcha_link" reason="Never"/>
+    <disable_collisions link1="Axis3_link" link2="Rueda1Izq_link" reason="Never"/>
+    <disable_collisions link1="Axis3_link" link2="Rueda2Drcha_link" reason="Never"/>
+    <disable_collisions link1="Axis3_link" link2="Rueda2Izq_link" reason="Never"/>
+    <disable_collisions link1="Axis3_link" link2="Rueda3Drcha_link" reason="Adjacent"/>
+    <disable_collisions link1="Axis3_link" link2="Rueda3Izq_link" reason="Adjacent"/>
+    <disable_collisions link1="Base_link" link2="CilindroPinza1_link" reason="Never"/>
+    <disable_collisions link1="Base_link" link2="Cylinder_link" reason="Never"/>
+    <disable_collisions link1="Base_link" link2="L1Barra_link" reason="Never"/>
+    <disable_collisions link1="Base_link" link2="L2Barra_link" reason="Never"/>
+    <disable_collisions link1="Base_link" link2="Pared1_link" reason="Adjacent"/>
+    <disable_collisions link1="Base_link" link2="Pared2_link" reason="Adjacent"/>
+    <disable_collisions link1="Base_link" link2="Pared3_link" reason="Adjacent"/>
+    <disable_collisions link1="Base_link" link2="Pared4_link" reason="Adjacent"/>
+    <disable_collisions link1="Base_link" link2="PinzaBarra_link" reason="Never"/>
+    <disable_collisions link1="Base_link" link2="PinzaBase_link" reason="Adjacent"/>
+    <disable_collisions link1="Base_link" link2="Rueda1Drcha_link" reason="Never"/>
+    <disable_collisions link1="Base_link" link2="Rueda1Izq_link" reason="Never"/>
+    <disable_collisions link1="Base_link" link2="Rueda2Drcha_link" reason="Never"/>
+    <disable_collisions link1="Base_link" link2="Rueda2Izq_link" reason="Never"/>
+    <disable_collisions link1="Base_link" link2="Rueda3Drcha_link" reason="Never"/>
+    <disable_collisions link1="Base_link" link2="Rueda3Izq_link" reason="Never"/>
+    <disable_collisions link1="CilindroPinza1_link" link2="CilindroPinza2_link" reason="Never"/>
+    <disable_collisions link1="CilindroPinza1_link" link2="Cylinder_link" reason="Never"/>
+    <disable_collisions link1="CilindroPinza1_link" link2="L1Barra_link" reason="Never"/>
+    <disable_collisions link1="CilindroPinza1_link" link2="L2Barra_link" reason="Adjacent"/>
+    <disable_collisions link1="CilindroPinza1_link" link2="Pared1_link" reason="Never"/>
+    <disable_collisions link1="CilindroPinza1_link" link2="Pared2_link" reason="Never"/>
+    <disable_collisions link1="CilindroPinza1_link" link2="Pared3_link" reason="Never"/>
+    <disable_collisions link1="CilindroPinza1_link" link2="Pared4_link" reason="Never"/>
+    <disable_collisions link1="CilindroPinza1_link" link2="Pinza1_link" reason="Never"/>
+    <disable_collisions link1="CilindroPinza1_link" link2="Pinza2_link" reason="Never"/>
+    <disable_collisions link1="CilindroPinza1_link" link2="PinzaBarra_link" reason="Never"/>
+    <disable_collisions link1="CilindroPinza1_link" link2="PinzaBase_link" reason="Never"/>
+    <disable_collisions link1="CilindroPinza1_link" link2="Rueda1Drcha_link" reason="Never"/>
+    <disable_collisions link1="CilindroPinza1_link" link2="Rueda1Izq_link" reason="Never"/>
+    <disable_collisions link1="CilindroPinza1_link" link2="Rueda2Drcha_link" reason="Never"/>
+    <disable_collisions link1="CilindroPinza1_link" link2="Rueda2Izq_link" reason="Never"/>
+    <disable_collisions link1="CilindroPinza1_link" link2="Rueda3Drcha_link" reason="Never"/>
+    <disable_collisions link1="CilindroPinza1_link" link2="Rueda3Izq_link" reason="Never"/>
+    <disable_collisions link1="CilindroPinza2_link" link2="Cylinder_link" reason="Never"/>
+    <disable_collisions link1="CilindroPinza2_link" link2="L1Barra_link" reason="Never"/>
+    <disable_collisions link1="CilindroPinza2_link" link2="L2Barra_link" reason="Never"/>
+    <disable_collisions link1="CilindroPinza2_link" link2="Pared1_link" reason="Never"/>
+    <disable_collisions link1="CilindroPinza2_link" link2="Pinza1_link" reason="Adjacent"/>
+    <disable_collisions link1="CilindroPinza2_link" link2="Pinza2_link" reason="Adjacent"/>
+    <disable_collisions link1="CilindroPinza2_link" link2="PinzaBarra_link" reason="Never"/>
+    <disable_collisions link1="CilindroPinza2_link" link2="PinzaBase_link" reason="Never"/>
+    <disable_collisions link1="CilindroPinza2_link" link2="Rueda3Drcha_link" reason="Never"/>
+    <disable_collisions link1="Cylinder_link" link2="L1Barra_link" reason="Adjacent"/>
+    <disable_collisions link1="Cylinder_link" link2="L2Barra_link" reason="Adjacent"/>
+    <disable_collisions link1="Cylinder_link" link2="Pared1_link" reason="Never"/>
+    <disable_collisions link1="Cylinder_link" link2="Pared2_link" reason="Never"/>
+    <disable_collisions link1="Cylinder_link" link2="Pared3_link" reason="Never"/>
+    <disable_collisions link1="Cylinder_link" link2="Pared4_link" reason="Never"/>
+    <disable_collisions link1="Cylinder_link" link2="Pinza1_link" reason="Never"/>
+    <disable_collisions link1="Cylinder_link" link2="Pinza2_link" reason="Never"/>
+    <disable_collisions link1="Cylinder_link" link2="PinzaBarra_link" reason="Never"/>
+    <disable_collisions link1="Cylinder_link" link2="PinzaBase_link" reason="Never"/>
+    <disable_collisions link1="Cylinder_link" link2="Rueda1Drcha_link" reason="Never"/>
+    <disable_collisions link1="Cylinder_link" link2="Rueda1Izq_link" reason="Never"/>
+    <disable_collisions link1="Cylinder_link" link2="Rueda2Drcha_link" reason="Never"/>
+    <disable_collisions link1="Cylinder_link" link2="Rueda2Izq_link" reason="Never"/>
+    <disable_collisions link1="Cylinder_link" link2="Rueda3Drcha_link" reason="Never"/>
+    <disable_collisions link1="Cylinder_link" link2="Rueda3Izq_link" reason="Never"/>
+    <disable_collisions link1="L1Barra_link" link2="L2Barra_link" reason="Default"/>
+    <disable_collisions link1="L1Barra_link" link2="Pared1_link" reason="Never"/>
+    <disable_collisions link1="L1Barra_link" link2="Pared2_link" reason="Never"/>
+    <disable_collisions link1="L1Barra_link" link2="Pared3_link" reason="Never"/>
+    <disable_collisions link1="L1Barra_link" link2="Pared4_link" reason="Never"/>
+    <disable_collisions link1="L1Barra_link" link2="Pinza1_link" reason="Never"/>
+    <disable_collisions link1="L1Barra_link" link2="Pinza2_link" reason="Never"/>
+    <disable_collisions link1="L1Barra_link" link2="PinzaBarra_link" reason="Adjacent"/>
+    <disable_collisions link1="L1Barra_link" link2="PinzaBase_link" reason="Never"/>
+    <disable_collisions link1="L1Barra_link" link2="Rueda1Drcha_link" reason="Never"/>
+    <disable_collisions link1="L1Barra_link" link2="Rueda1Izq_link" reason="Never"/>
+    <disable_collisions link1="L1Barra_link" link2="Rueda2Drcha_link" reason="Never"/>
+    <disable_collisions link1="L1Barra_link" link2="Rueda2Izq_link" reason="Never"/>
+    <disable_collisions link1="L1Barra_link" link2="Rueda3Drcha_link" reason="Never"/>
+    <disable_collisions link1="L1Barra_link" link2="Rueda3Izq_link" reason="Never"/>
+    <disable_collisions link1="L2Barra_link" link2="Pared1_link" reason="Never"/>
+    <disable_collisions link1="L2Barra_link" link2="Pared2_link" reason="Never"/>
+    <disable_collisions link1="L2Barra_link" link2="Pared3_link" reason="Never"/>
+    <disable_collisions link1="L2Barra_link" link2="Pared4_link" reason="Never"/>
+    <disable_collisions link1="L2Barra_link" link2="Pinza1_link" reason="Never"/>
+    <disable_collisions link1="L2Barra_link" link2="Pinza2_link" reason="Never"/>
+    <disable_collisions link1="L2Barra_link" link2="PinzaBarra_link" reason="Never"/>
+    <disable_collisions link1="L2Barra_link" link2="PinzaBase_link" reason="Never"/>
+    <disable_collisions link1="L2Barra_link" link2="Rueda1Drcha_link" reason="Never"/>
+    <disable_collisions link1="L2Barra_link" link2="Rueda1Izq_link" reason="Never"/>
+    <disable_collisions link1="L2Barra_link" link2="Rueda2Drcha_link" reason="Never"/>
+    <disable_collisions link1="L2Barra_link" link2="Rueda2Izq_link" reason="Never"/>
+    <disable_collisions link1="L2Barra_link" link2="Rueda3Drcha_link" reason="Never"/>
+    <disable_collisions link1="L2Barra_link" link2="Rueda3Izq_link" reason="Never"/>
+    <disable_collisions link1="Pared1_link" link2="Pared2_link" reason="Never"/>
+    <disable_collisions link1="Pared1_link" link2="Pared3_link" reason="Default"/>
+    <disable_collisions link1="Pared1_link" link2="Pared4_link" reason="Default"/>
+    <disable_collisions link1="Pared1_link" link2="Pinza1_link" reason="Never"/>
+    <disable_collisions link1="Pared1_link" link2="Pinza2_link" reason="Never"/>
+    <disable_collisions link1="Pared1_link" link2="PinzaBarra_link" reason="Never"/>
+    <disable_collisions link1="Pared1_link" link2="PinzaBase_link" reason="Never"/>
+    <disable_collisions link1="Pared1_link" link2="Rueda1Drcha_link" reason="Never"/>
+    <disable_collisions link1="Pared1_link" link2="Rueda1Izq_link" reason="Never"/>
+    <disable_collisions link1="Pared1_link" link2="Rueda2Drcha_link" reason="Never"/>
+    <disable_collisions link1="Pared1_link" link2="Rueda2Izq_link" reason="Never"/>
+    <disable_collisions link1="Pared1_link" link2="Rueda3Drcha_link" reason="Never"/>
+    <disable_collisions link1="Pared1_link" link2="Rueda3Izq_link" reason="Never"/>
+    <disable_collisions link1="Pared2_link" link2="Pared3_link" reason="Never"/>
+    <disable_collisions link1="Pared2_link" link2="Pared4_link" reason="Default"/>
+    <disable_collisions link1="Pared2_link" link2="PinzaBarra_link" reason="Never"/>
+    <disable_collisions link1="Pared2_link" link2="PinzaBase_link" reason="Never"/>
+    <disable_collisions link1="Pared2_link" link2="Rueda1Drcha_link" reason="Never"/>
+    <disable_collisions link1="Pared2_link" link2="Rueda1Izq_link" reason="Never"/>
+    <disable_collisions link1="Pared2_link" link2="Rueda2Drcha_link" reason="Never"/>
+    <disable_collisions link1="Pared2_link" link2="Rueda2Izq_link" reason="Never"/>
+    <disable_collisions link1="Pared2_link" link2="Rueda3Drcha_link" reason="Never"/>
+    <disable_collisions link1="Pared2_link" link2="Rueda3Izq_link" reason="Never"/>
+    <disable_collisions link1="Pared3_link" link2="Pared4_link" reason="Never"/>
+    <disable_collisions link1="Pared3_link" link2="PinzaBarra_link" reason="Never"/>
+    <disable_collisions link1="Pared3_link" link2="PinzaBase_link" reason="Never"/>
+    <disable_collisions link1="Pared3_link" link2="Rueda1Drcha_link" reason="Never"/>
+    <disable_collisions link1="Pared3_link" link2="Rueda1Izq_link" reason="Never"/>
+    <disable_collisions link1="Pared3_link" link2="Rueda2Drcha_link" reason="Never"/>
+    <disable_collisions link1="Pared3_link" link2="Rueda2Izq_link" reason="Never"/>
+    <disable_collisions link1="Pared3_link" link2="Rueda3Drcha_link" reason="Never"/>
+    <disable_collisions link1="Pared3_link" link2="Rueda3Izq_link" reason="Never"/>
+    <disable_collisions link1="Pared4_link" link2="PinzaBarra_link" reason="Never"/>
+    <disable_collisions link1="Pared4_link" link2="PinzaBase_link" reason="Never"/>
+    <disable_collisions link1="Pared4_link" link2="Rueda1Drcha_link" reason="Never"/>
+    <disable_collisions link1="Pared4_link" link2="Rueda1Izq_link" reason="Never"/>
+    <disable_collisions link1="Pared4_link" link2="Rueda2Drcha_link" reason="Never"/>
+    <disable_collisions link1="Pared4_link" link2="Rueda2Izq_link" reason="Never"/>
+    <disable_collisions link1="Pared4_link" link2="Rueda3Drcha_link" reason="Never"/>
+    <disable_collisions link1="Pared4_link" link2="Rueda3Izq_link" reason="Never"/>
+    <disable_collisions link1="Pinza1_link" link2="PinzaBarra_link" reason="Never"/>
+    <disable_collisions link1="Pinza1_link" link2="PinzaBase_link" reason="Never"/>
+    <disable_collisions link1="Pinza1_link" link2="Rueda3Drcha_link" reason="Never"/>
+    <disable_collisions link1="Pinza2_link" link2="PinzaBarra_link" reason="Never"/>
+    <disable_collisions link1="Pinza2_link" link2="PinzaBase_link" reason="Never"/>
+    <disable_collisions link1="Pinza2_link" link2="Rueda3Drcha_link" reason="Never"/>
+    <disable_collisions link1="PinzaBarra_link" link2="PinzaBase_link" reason="Adjacent"/>
+    <disable_collisions link1="PinzaBarra_link" link2="Rueda1Drcha_link" reason="Never"/>
+    <disable_collisions link1="PinzaBarra_link" link2="Rueda1Izq_link" reason="Never"/>
+    <disable_collisions link1="PinzaBarra_link" link2="Rueda2Drcha_link" reason="Never"/>
+    <disable_collisions link1="PinzaBarra_link" link2="Rueda2Izq_link" reason="Never"/>
+    <disable_collisions link1="PinzaBarra_link" link2="Rueda3Drcha_link" reason="Never"/>
+    <disable_collisions link1="PinzaBarra_link" link2="Rueda3Izq_link" reason="Never"/>
+    <disable_collisions link1="PinzaBase_link" link2="Rueda1Drcha_link" reason="Never"/>
+    <disable_collisions link1="PinzaBase_link" link2="Rueda1Izq_link" reason="Never"/>
+    <disable_collisions link1="PinzaBase_link" link2="Rueda2Drcha_link" reason="Never"/>
+    <disable_collisions link1="PinzaBase_link" link2="Rueda2Izq_link" reason="Never"/>
+    <disable_collisions link1="PinzaBase_link" link2="Rueda3Drcha_link" reason="Never"/>
+    <disable_collisions link1="PinzaBase_link" link2="Rueda3Izq_link" reason="Never"/>
+    <disable_collisions link1="Rueda1Drcha_link" link2="Rueda1Izq_link" reason="Never"/>
+    <disable_collisions link1="Rueda1Drcha_link" link2="Rueda2Drcha_link" reason="Never"/>
+    <disable_collisions link1="Rueda1Drcha_link" link2="Rueda2Izq_link" reason="Never"/>
+    <disable_collisions link1="Rueda1Drcha_link" link2="Rueda3Drcha_link" reason="Never"/>
+    <disable_collisions link1="Rueda1Drcha_link" link2="Rueda3Izq_link" reason="Never"/>
+    <disable_collisions link1="Rueda1Izq_link" link2="Rueda2Drcha_link" reason="Never"/>
+    <disable_collisions link1="Rueda1Izq_link" link2="Rueda2Izq_link" reason="Never"/>
+    <disable_collisions link1="Rueda1Izq_link" link2="Rueda3Drcha_link" reason="Never"/>
+    <disable_collisions link1="Rueda1Izq_link" link2="Rueda3Izq_link" reason="Never"/>
+    <disable_collisions link1="Rueda2Drcha_link" link2="Rueda2Izq_link" reason="Never"/>
+    <disable_collisions link1="Rueda2Drcha_link" link2="Rueda3Drcha_link" reason="Never"/>
+    <disable_collisions link1="Rueda2Drcha_link" link2="Rueda3Izq_link" reason="Never"/>
+    <disable_collisions link1="Rueda2Izq_link" link2="Rueda3Drcha_link" reason="Never"/>
+    <disable_collisions link1="Rueda2Izq_link" link2="Rueda3Izq_link" reason="Never"/>
+    <disable_collisions link1="Rueda3Drcha_link" link2="Rueda3Izq_link" reason="Never"/>
+</robot>

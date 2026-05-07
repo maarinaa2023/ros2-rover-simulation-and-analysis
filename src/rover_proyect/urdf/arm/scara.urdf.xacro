@@ -1,0 +1,175 @@
+<?xml version="1.0"?>
+<robot name="scara" xmlns:xacro="http://wiki.ros.org/xacro">
+
+  <xacro:macro name="scara" params="parent">
+
+    <joint name="PinzaBase_link_joint" type="fixed">
+      <origin rpy="0 0 0" xyz="-0.43433 -0.39334 0.03490"/>
+      <parent link="${parent}"/>
+      <child link="PinzaBase_link"/>
+    </joint>
+
+    <joint name="PinzaBarra_link_joint" type="revolute">
+      <limit lower="-3.14000" upper="3.14000" effort="100.0" velocity="3.0"/>
+      <origin rpy="0 0 0" xyz="0.03724 0.04687 0.61833"/>
+      <parent link="PinzaBase_link"/>
+      <child link="PinzaBarra_link"/>
+      <axis xyz="0 0 1"/>
+    </joint>
+
+    <joint name="L1Barra_link_joint" type="fixed">
+      <origin rpy="0 1.57080 0" xyz="0.27880 0.00490 0.45367"/>
+      <parent link="PinzaBarra_link"/>
+      <child link="L1Barra_link"/>
+    </joint>
+
+    <joint name="Cylinder_link_joint" type="revolute">
+      <limit lower="-1.57000" upper="1.57000" effort="100.0" velocity="5.0"/>
+      <origin rpy="0 -1.57080 0" xyz="-0.02160 0.00515 0.31468"/>
+      <parent link="L1Barra_link"/>
+      <child link="Cylinder_link"/>
+      <axis xyz="0 0 1"/>
+    </joint>
+
+    <joint name="L2Barra_link_joint" type="fixed">
+      <origin rpy="0 0 0" xyz="0.39973 -0.01444 0.04107"/>
+      <parent link="Cylinder_link"/>
+      <child link="L2Barra_link"/>
+    </joint>
+
+    <joint name="CilindroPinza1_link_joint" type="revolute">
+      <limit lower="-3.14000" upper="3.14000" effort="100.0" velocity="3.0"/>
+      <origin rpy="0 0 0" xyz="0.41138 0.00017 0.01680"/>
+      <parent link="L2Barra_link"/>
+      <child link="CilindroPinza1_link"/>
+      <axis xyz="0 0 1"/>
+    </joint>
+
+    <joint name="AjustaAlturaPinza_link_joint" type="prismatic">
+      <limit lower="-1.0" upper="0.5" effort="100.0" velocity="2.0"/>
+      <origin rpy="0 0 0" xyz="0.00070 0.00096 -0.06794"/>
+      <parent link="CilindroPinza1_link"/>
+      <child link="AjustaAlturaPinza_link"/>
+      <axis xyz="0 0 1"/>
+    </joint>
+
+    <link name="PinzaBase_link">
+      <visual name="PinzaBase">
+        <material name="None"/>
+        <origin rpy="0 0 0" xyz="0.03531 0.06165 0"/>
+        <geometry><cylinder radius="0.35000" length="0.04000"/></geometry>
+      </visual>
+      <collision>
+        <origin rpy="0 0 0" xyz="0.03531 0.06165 0"/>
+        <geometry><cylinder radius="0.35000" length="0.04000"/></geometry>
+      </collision>
+      <inertial>
+        <mass value="1.0"/>
+        <origin rpy="0 0 0" xyz="0 0 0"/>
+        <inertia ixx="0.1" ixy="0" ixz="0" iyy="0.1" iyz="0" izz="0.1"/>
+      </inertial>
+    </link>
+
+    <link name="PinzaBarra_link">
+      <visual name="PinzaBarra">
+        <material name="None"/>
+        <origin rpy="0 0 0" xyz="0 0 0"/>
+        <geometry><cylinder radius="0.15000" length="1.20000"/></geometry>
+      </visual>
+      <collision>
+        <origin rpy="0 0 0" xyz="0 0 0"/>
+        <geometry><cylinder radius="0.15" length="1.20"/></geometry>
+      </collision>
+      <inertial>
+        <mass value="1.5"/>
+        <origin rpy="0 0 0" xyz="0 0 0"/>
+        <inertia ixx="0.2" ixy="0" ixz="0" iyy="0.2" iyz="0" izz="0.05"/>
+      </inertial>
+    </link>
+
+    <link name="L1Barra_link">
+      <visual name="L1Barra">
+        <material name="None"/>
+        <origin rpy="0 -1.57080 0" xyz="0 0 0"/>
+        <geometry><box size="1.00000 0.45000 0.07000"/></geometry>
+      </visual>
+      <collision>
+        <origin rpy="0 -1.57080 0" xyz="0 0 0"/>
+        <geometry><box size="1.00000 0.45000 0.07000"/></geometry>
+      </collision>
+      <inertial>
+        <mass value="1.0"/>
+        <origin rpy="0 0 0" xyz="0 0 0"/>
+        <inertia ixx="0.1" ixy="0" ixz="0" iyy="0.1" iyz="0" izz="0.1"/>
+      </inertial>
+    </link>
+
+    <link name="Cylinder_link">
+      <visual name="Cylinder">
+        <material name="None"/>
+        <origin rpy="0 0 0" xyz="0 0 0"/>
+        <geometry><cylinder radius="0.15000" length="0.15000"/></geometry>
+      </visual>
+      <collision>
+        <origin rpy="0 0 0" xyz="0 0 0"/>
+        <geometry><cylinder radius="0.15" length="0.15"/></geometry>
+      </collision>
+      <inertial>
+        <mass value="0.5"/>
+        <origin rpy="0 0 0" xyz="0 0 0"/>
+        <inertia ixx="0.05" ixy="0" ixz="0" iyy="0.05" iyz="0" izz="0.05"/>
+      </inertial>
+    </link>
+
+    <link name="L2Barra_link">
+      <visual name="L2Barra">
+        <material name="None"/>
+        <origin rpy="0 0 0" xyz="0 0 0"/>
+        <geometry><box size="1.00000 0.45000 0.07000"/></geometry>
+      </visual>
+      <collision>
+        <origin rpy="0 0 0" xyz="0 0 0"/>
+        <geometry><box size="1.0 0.45 0.07"/></geometry>
+      </collision>
+      <inertial>
+        <mass value="1.0"/>
+        <origin rpy="0 0 0" xyz="0 0 0"/>
+        <inertia ixx="0.1" ixy="0" ixz="0" iyy="0.1" iyz="0" izz="0.1"/>
+      </inertial>
+    </link>
+
+    <link name="CilindroPinza1_link">
+      <visual name="CilindroPinza1">
+        <material name="None"/>
+        <origin rpy="0 0 0" xyz="0 0 0"/>
+        <geometry><cylinder radius="0.20000" length="0.10000"/></geometry>
+      </visual>
+      <collision>
+        <origin rpy="0 0 0" xyz="0 0 0"/>
+        <geometry><cylinder radius="0.20" length="0.10"/></geometry>
+      </collision>
+      <inertial>
+        <mass value="0.5"/>
+        <origin rpy="0 0 0" xyz="0 0 0"/>
+        <inertia ixx="0.05" ixy="0" ixz="0" iyy="0.05" iyz="0" izz="0.05"/>
+      </inertial>
+    </link>
+
+    <link name="AjustaAlturaPinza_link">
+      <visual name="AjustaAlturaPinza">
+        <material name="None"/>
+        <origin rpy="0 0 0" xyz="0 0 0.10784"/>
+        <geometry><cylinder radius="0.04000" length="1.25000"/></geometry>
+      </visual>
+      <collision>
+        <origin rpy="0 0 0" xyz="0 0 0.10784"/>
+        <geometry><cylinder radius="0.04" length="1.25"/></geometry>
+      </collision>
+      <inertial>
+        <mass value="0.5"/>
+        <origin rpy="0 0 0" xyz="0 0 0"/>
+        <inertia ixx="0.05" ixy="0" ixz="0" iyy="0.05" iyz="0" izz="0.05"/>
+      </inertial>
+    </link>
+  </xacro:macro>
+</robot>

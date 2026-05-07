@@ -1,0 +1,656 @@
+<?xml version="1.0"?>
+<robot name="correctRover" version="1.0">
+
+  <joint name="Axis1_link_joint" type="fixed">
+    <origin rpy="0.00000 0.00000 -3.13536" xyz="-0.88055 0.00139 -0.08971"/>
+    <parent link="Base_link"/>
+    <child link="Axis1_link"/>
+  </joint>
+
+  <joint name="Rueda1Drcha_link_joint" type="continuous">
+    <limit effort="100.0" velocity="20.0"/>
+    <origin rpy="1.57080 -0.00000 0.00000" xyz="-0.22424 -0.82753 -0.20939"/>
+    <parent link="Axis1_link"/>
+    <child link="Rueda1Drcha_link"/>
+    <axis xyz="0.00000 0.00000 1.00000"/>
+  </joint>
+
+  <joint name="Cube.002_link_joint" type="fixed">
+    <origin rpy="0.00000 0.00000 1.57080" xyz="0.54692 -0.72127 0.15044"/>
+    <parent link="Base_link"/>
+    <child link="Cube.002_link"/>
+  </joint>
+
+  <joint name="Cube.003_link_joint" type="fixed">
+    <origin rpy="0.00000 0.00000 -1.57080" xyz="0.54511 0.72236 0.15044"/>
+    <parent link="Base_link"/>
+    <child link="Cube.003_link"/>
+  </joint>
+
+  <joint name="Cube_link_joint" type="fixed">
+    <origin rpy="0.00000 0.00000 0.00000" xyz="1.01230 0.00000 0.15044"/>
+    <parent link="Base_link"/>
+    <child link="Cube_link"/>
+  </joint>
+
+  <joint name="PinzaBase_link_joint" type="fixed">
+    <origin rpy="0.00000 0.00000 0.00000" xyz="-0.43433 -0.39334 0.03490"/>
+    <parent link="Base_link"/>
+    <child link="PinzaBase_link"/>
+  </joint>
+
+  <joint name="PinzaBarra_link_joint" type="revolute">
+    <limit lower="-3.14000" upper="3.14000" effort="100.0" velocity="3.0"/>
+    <origin rpy="0.00000 0.00000 0.00000" xyz="0.03724 0.04687 0.61833"/>
+    <parent link="PinzaBase_link"/>
+    <child link="PinzaBarra_link"/>
+    <axis xyz="0.00000 0.00000 1.00000"/>
+  </joint>
+
+  <joint name="L1Barra_link_joint" type="fixed">
+    <origin rpy="-0.00000 1.57080 0.00000" xyz="0.27880 0.00490 0.45367"/>
+    <parent link="PinzaBarra_link"/>
+    <child link="L1Barra_link"/>
+  </joint>
+
+  <joint name="Cylinder_link_joint" type="revolute">
+    <limit lower="-1.57000" upper="1.57000" effort="100.0" velocity="5.0"/>
+    <origin rpy="0.00000 -1.57080 0.00000" xyz="-0.02160 0.00515 0.31468"/>
+    <parent link="L1Barra_link"/>
+    <child link="Cylinder_link"/>
+    <axis xyz="0.00000 0.00000 1.00000"/>
+  </joint>
+
+  <joint name="L2Barra_link_joint" type="fixed">
+    <origin rpy="0.00000 0.00000 0.00000" xyz="0.39973 -0.01444 0.04107"/>
+    <parent link="Cylinder_link"/>
+    <child link="L2Barra_link"/>
+  </joint>
+
+  <joint name="CilindroPinza1_link_joint" type="revolute">
+    <limit lower="-3.14000" upper="3.14000" effort="100.0" velocity="3.0"/>
+    <origin rpy="0.00000 0.00000 0.00000" xyz="0.41138 0.00017 0.01680"/>
+    <parent link="L2Barra_link"/>
+    <child link="CilindroPinza1_link"/>
+    <axis xyz="0.00000 0.00000 1.00000"/>
+  </joint>
+
+  <joint name="AjustaAlturaPinza_link_joint" type="prismatic">
+    <limit lower="-1.0" upper="0.5" effort="100.0" velocity="2.0"/>
+    <origin rpy="0.00000 0.00000 0.00000" xyz="0.00070 0.00096 -0.06794"/>
+    <parent link="CilindroPinza1_link"/>
+    <child link="AjustaAlturaPinza_link"/>
+    <axis xyz="0.00000 0.00000 1.00000"/>
+  </joint>
+
+  <joint name="Rueda1Izq_link_joint" type="continuous">
+    <limit effort="100.0" velocity="20.0"/>
+    <origin rpy="-1.57080 0.00000 3.13536" xyz="-0.21372 0.86399 -0.20801"/>
+    <parent link="Axis1_link"/>
+    <child link="Rueda1Izq_link"/>
+    <axis xyz="0.00000 0.00000 1.00000"/>
+  </joint>
+
+  <joint name="CilindroPinza2_link_joint" type="fixed">
+    <origin rpy="0.00000 0.00000 0.00000" xyz="0.00135 0.00931 -0.53102"/>
+    <parent link="AjustaAlturaPinza_link"/>
+    <child link="CilindroPinza2_link"/>
+  </joint>
+
+  <joint name="Pinza1_link_joint" type="prismatic">
+    <limit lower="-0.1" upper="0.3" effort="100.0" velocity="3.0"/>
+    <origin rpy="-1.57080 0.00000 0.00000" xyz="-0.00065 -0.29 -0.065"/>
+    <parent link="CilindroPinza2_link"/>
+    <child link="Pinza1_link"/>
+    <axis xyz="0.00000 0.00000 1.00000"/>
+  </joint>
+
+  <joint name="Pinza2_link_joint" type="prismatic">
+    <limit lower="-0.1" upper="0.3" effort="100.0" velocity="3.0"/>
+    <origin rpy="1.57080 0.00000 0.00000" xyz="-0.00246 0.29 -0.065"/>
+    <parent link="CilindroPinza2_link"/>
+    <child link="Pinza2_link"/>
+    <axis xyz="0.00000 0.00000 1.00000"/>
+  </joint>
+
+  <joint name="Axis2_link_joint" type="fixed">
+    <origin rpy="0.00000 0.00000 -3.13536" xyz="0.05611 0.00545 -0.09470"/>
+    <parent link="Base_link"/>
+    <child link="Axis2_link"/>
+  </joint>
+
+  <joint name="Rueda2Drcha_link_joint" type="continuous">
+    <limit effort="100.0" velocity="20.0"/>
+    <origin rpy="1.57080 -0.00000 0.00000" xyz="-0.22447 -0.82347 -0.20439"/>
+    <parent link="Axis2_link"/>
+    <child link="Rueda2Drcha_link"/>
+    <axis xyz="0.00000 0.00000 1.00000"/>
+  </joint>
+
+  <joint name="Rueda2Izq_link_joint" type="continuous">
+    <limit effort="100.0" velocity="20.0"/>
+    <origin rpy="-1.57080 0.00000 3.13536" xyz="-0.21395 0.86806 -0.20301"/>
+    <parent link="Axis2_link"/>
+    <child link="Rueda2Izq_link"/>
+    <axis xyz="0.00000 0.00000 1.00000"/>
+  </joint>
+
+  <joint name="Axis3_link_joint" type="fixed">
+    <origin rpy="0.00000 0.00000 -3.13536" xyz="0.98860 -0.00742 -0.08702"/>
+    <parent link="Base_link"/>
+    <child link="Axis3_link"/>
+  </joint>
+
+  <joint name="Rueda3Drcha_link_joint" type="continuous">
+    <limit effort="100.0" velocity="20.0"/>
+    <origin rpy="1.57080 -0.00000 0.00000" xyz="-0.22028 -0.83636 -0.21208"/>
+    <parent link="Axis3_link"/>
+    <child link="Rueda3Drcha_link"/>
+    <axis xyz="0.00000 0.00000 1.00000"/>
+  </joint>
+
+  <joint name="Rueda3Izq_link_joint" type="continuous">
+    <limit effort="100.0" velocity="20.0"/>
+    <origin rpy="-1.57080 0.00000 3.13536" xyz="-0.20976 0.85516 -0.21070"/>
+    <parent link="Axis3_link"/>
+    <child link="Rueda3Izq_link"/>
+    <axis xyz="0.00000 0.00000 1.00000"/>
+  </joint>
+
+  <joint name="Cube.001_link_joint" type="fixed">
+    <origin rpy="0.00000 0.00000 -3.14159" xyz="0.07147 0.00000 0.15044"/>
+    <parent link="Base_link"/>
+    <child link="Cube.001_link"/>
+  </joint>
+
+  <link name="Base_link">
+    <visual name="Base">
+      <material name="None"/>
+      <origin rpy="0.00000 0.00000 0.00000" xyz="-0.88269 0.00000 -0.29771"/>
+      <geometry>
+        <mesh filename="../meshes/dae/Cube.042.dae" scale="1.25000 0.97696 1.00000"/>
+      </geometry>
+    </visual>
+    <collision>
+      <origin rpy="0 0 0" xyz="0.05 0 0"/>
+      <geometry>
+        <box size="1.2 1.2 0.3"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <mass value="50.0"/>
+      <origin rpy="0 0 0" xyz="0.05 0 0"/>
+      <inertia ixx="10.0" ixy="0" ixz="0" iyy="10.0" iyz="0" izz="10.0"/>
+    </inertial>
+  </link>
+
+  <link name="Axis1_link">
+    <visual name="Axis1">
+      <material name="Material.006"/>
+      <origin rpy="0.00000 0.00000 0.00000" xyz="-0.22252 -0.22955 -0.00816"/>
+      <geometry>
+        <mesh filename="../meshes/dae/Cube.005.dae" scale="0.02500 0.25000 0.02500"/>
+      </geometry>
+    </visual>
+    <collision>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+        <box size="0.05 1.8 0.05"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <mass value="1.0"/>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <inertia ixx="0.1" ixy="0" ixz="0" iyy="0.1" iyz="0" izz="0.1"/>
+    </inertial>
+  </link>
+
+  <link name="Cube.001_link">
+    <visual name="Cube.001">
+      <material name="None"/>
+      <origin rpy="0.00000 0.00000 -0.00000" xyz="-0.48273 0.00000 -0.00000"/>
+      <geometry>
+        <box size="0.03000 1.48000 0.25000"/>
+      </geometry>
+    </visual>
+    <inertial>
+      <mass value="0.1"/>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <inertia ixx="0.01" ixy="0" ixz="0" iyy="0.01" iyz="0" izz="0.01"/>
+    </inertial>
+  </link>
+
+  <link name="Cube.002_link">
+    <visual name="Cube.002">
+      <material name="None"/>
+      <origin rpy="0.00000 0.00000 0.00000" xyz="0.00000 -0.48273 -0.00000"/>
+      <geometry>
+        <box size="0.03000 0.92000 0.25000"/>
+      </geometry>
+    </visual>
+    <inertial>
+      <mass value="0.1"/>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <inertia ixx="0.01" ixy="0" ixz="0" iyy="0.01" iyz="0" izz="0.01"/>
+    </inertial>
+  </link>
+
+  <link name="Cube.003_link">
+    <visual name="Cube.003">
+      <material name="None"/>
+      <origin rpy="0.00000 0.00000 -0.00000" xyz="0.00000 0.48273 -0.00000"/>
+      <geometry>
+        <box size="0.03000 0.92000 0.25000"/>
+      </geometry>
+    </visual>
+    <inertial>
+      <mass value="0.1"/>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <inertia ixx="0.01" ixy="0" ixz="0" iyy="0.01" iyz="0" izz="0.01"/>
+    </inertial>
+  </link>
+
+  <link name="Cube_link">
+    <visual name="Cube">
+      <material name="None"/>
+      <origin rpy="0.00000 0.00000 0.00000" xyz="0.48273 0.00000 -0.00000"/>
+      <geometry>
+        <box size="0.03000 1.48000 0.25000"/>
+      </geometry>
+    </visual>
+    <inertial>
+      <mass value="0.1"/>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <inertia ixx="0.01" ixy="0" ixz="0" iyy="0.01" iyz="0" izz="0.01"/>
+    </inertial>
+  </link>
+
+  <link name="PinzaBase_link">
+    <visual name="PinzaBase">
+      <material name="None"/>
+      <origin rpy="0.00000 0.00000 0.00000" xyz="0.03531 0.06165 -0.00000"/>
+      <geometry>
+        <cylinder radius="0.35000" length="0.04000"/>
+      </geometry>
+    </visual>
+    <collision>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+        <cylinder radius="0.35" length="0.04"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <mass value="1.0"/>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <inertia ixx="0.1" ixy="0" ixz="0" iyy="0.1" iyz="0" izz="0.1"/>
+    </inertial>
+  </link>
+
+  <link name="PinzaBarra_link">
+    <visual name="PinzaBarra">
+      <material name="None"/>
+      <origin rpy="0.00000 0.00000 0.00000" xyz="0.0000 -0.00000 -0.00000"/>
+      <geometry>
+        <cylinder radius="0.15000" length="1.20000"/>
+      </geometry>
+    </visual>
+    <collision>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+        <cylinder radius="0.15" length="1.20"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <mass value="1.5"/>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <inertia ixx="0.2" ixy="0" ixz="0" iyy="0.2" iyz="0" izz="0.05"/>
+    </inertial>
+  </link>
+
+  <link name="L1Barra_link">
+    <visual name="L1Barra">
+      <material name="None"/>
+      <origin rpy="0.00000 -1.57080 0.00000" xyz="0.00000 0.00000 0.00000"/>
+      <geometry>
+        <box size="1.00000 0.45000 0.07000"/>
+      </geometry>
+    </visual>
+    <collision>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+        <box size="1.0 0.45 0.07"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <mass value="1.0"/>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <inertia ixx="0.1" ixy="0" ixz="0" iyy="0.1" iyz="0" izz="0.1"/>
+    </inertial>
+  </link>
+
+  <link name="Cylinder_link">
+    <visual name="Cylinder">
+      <material name="None"/>
+      <origin rpy="0.00000 0.00000 0.00000" xyz="0.00000 0.00000 -0.00000"/>
+      <geometry>
+        <cylinder radius="0.15000" length="0.15000"/>
+      </geometry>
+    </visual>
+    <collision>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+        <cylinder radius="0.15" length="0.15"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <mass value="0.5"/>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <inertia ixx="0.05" ixy="0" ixz="0" iyy="0.05" iyz="0" izz="0.05"/>
+    </inertial>
+  </link>
+
+  <link name="L2Barra_link">
+    <visual name="L2Barra">
+      <material name="None"/>
+      <origin rpy="0.00000 0.00000 0.00000" xyz="0.00000 -0.00000 -0.00000"/>
+      <geometry>
+        <box size="1.00000 0.45000 0.07000"/>
+      </geometry>
+    </visual>
+    <collision>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+        <box size="1.0 0.45 0.07"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <mass value="1.0"/>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <inertia ixx="0.1" ixy="0" ixz="0" iyy="0.1" iyz="0" izz="0.1"/>
+    </inertial>
+  </link>
+
+  <link name="CilindroPinza1_link">
+    <visual name="CilindroPinza1">
+      <material name="None"/>
+      <origin rpy="0.00000 0.00000 0.00000" xyz="0.00000 0.00000 0.00000"/>
+      <geometry>
+        <cylinder radius="0.20000" length="0.10000"/>
+      </geometry>
+    </visual>
+    <collision>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+        <cylinder radius="0.20" length="0.10"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <mass value="0.5"/>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <inertia ixx="0.05" ixy="0" ixz="0" iyy="0.05" iyz="0" izz="0.05"/>
+    </inertial>
+  </link>
+
+  <link name="Rueda1Drcha_link">
+    <visual name="Rueda1Drcha">
+      <material name="None"/>
+      <origin rpy="-0.00000 0.00000 0.00000" xyz="-0.00000  -0.00000 -0.00000 "/>
+      <geometry>
+        <mesh filename="../meshes/dae/Torus.003.dae" scale="0.20000 0.20000 0.60000"/>
+      </geometry>
+    </visual>
+    <collision>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+        <cylinder radius="0.18" length="0.15"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <mass value="2.0"/>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <inertia ixx="0.05" ixy="0" ixz="0" iyy="0.05" iyz="0" izz="0.05"/>
+    </inertial>
+  </link>
+
+  <link name="AjustaAlturaPinza_link">
+    <visual name="AjustaAlturaPinza">
+      <material name="None"/>
+      <origin rpy="0.00000 0.00000 0.00000" xyz="0.00000 0.00000 0.10784"/>
+      <geometry>
+        <cylinder radius="0.04000" length="1.25000"/>
+      </geometry>
+    </visual>
+    <collision>
+      <origin rpy="0 0 0" xyz="0 0 0.10784"/>
+      <geometry>
+        <cylinder radius="0.04" length="1.25"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <mass value="0.5"/>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <inertia ixx="0.05" ixy="0" ixz="0" iyy="0.05" iyz="0" izz="0.05"/>
+    </inertial>
+  </link>
+
+  <link name="CilindroPinza2_link">
+    <visual name="CilindroPinza2">
+      <material name="None"/>
+      <origin rpy="0.00000 0.00000 0.00000" xyz="0.00000 0.00000 -0.00000"/>
+      <geometry>
+        <cylinder radius="0.34500" length="0.04000"/>
+      </geometry>
+    </visual>
+    <collision>
+      <origin rpy="0 0 0" xyz="0 0 0.02"/>
+      <geometry>
+        <cylinder radius="0.345" length="0.04"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <mass value="0.5"/>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <inertia ixx="0.05" ixy="0" ixz="0" iyy="0.05" iyz="0" izz="0.05"/>
+    </inertial>
+  </link>
+
+  <link name="Pinza1_link">
+    <visual name="Pinza1">
+      <material name="None"/>
+      <origin rpy="1.57080 0.00000 0.00000" xyz="0.00000 0.12500 0.00000"/>
+      <geometry>
+        <mesh filename="../meshes/dae/Cube.011.dae" scale="0.12500 0.00681 0.20000"/>
+      </geometry>
+    </visual>
+    <collision>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+        <box size="1.2 0.05 0.1"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <mass value="0.3"/>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <inertia ixx="0.01" ixy="0" ixz="0" iyy="0.01" iyz="0" izz="0.01"/>
+    </inertial>
+  </link>
+
+  <link name="Pinza2_link">
+    <visual name="Pinza2">
+      <material name="None"/>
+      <origin rpy="1.57080 0.00000 0.00000" xyz="0.00000 -0.12500 -0.00000"/>
+      <geometry>
+        <mesh filename="../meshes/dae/Cube.014.dae" scale="0.12500 0.00681 0.20000"/>
+      </geometry>
+    </visual>
+    <collision>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+        <box size="1.2 0.05 0.1"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <mass value="0.3"/>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <inertia ixx="0.01" ixy="0" ixz="0" iyy="0.01" iyz="0" izz="0.01"/>
+    </inertial>
+  </link>
+
+  <link name="Rueda1Izq_link">
+    <visual name="Rueda1Izq">
+      <material name="None"/>
+      <origin rpy="3.14159 0.00000 0.00000" xyz="0.00000 0.00000 -0.00000"/>
+      <geometry>
+        <mesh filename="../meshes/dae/Torus.dae" scale="0.20000 0.20000 0.60000"/>
+      </geometry>
+    </visual>
+    <collision>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+        <cylinder radius="0.18" length="0.15"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <mass value="2.0"/>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <inertia ixx="0.05" ixy="0" ixz="0" iyy="0.05" iyz="0" izz="0.05"/>
+    </inertial>
+  </link>
+
+  <link name="Axis2_link">
+    <visual name="Axis2">
+      <material name="Material.008"/>
+      <origin rpy="0.00000 0.00000 0.00000" xyz="-0.22275 -0.22549 -0.00317"/>
+      <geometry>
+        <mesh filename="../meshes/dae/Cube.006.dae" scale="0.02500 0.25000 0.02500"/>
+      </geometry>
+    </visual>
+    <collision>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+        <box size="0.05 1.8 0.05"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <mass value="1.0"/>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <inertia ixx="0.1" ixy="0" ixz="0" iyy="0.1" iyz="0" izz="0.1"/>
+    </inertial>
+  </link>
+
+  <link name="Rueda2Drcha_link">
+    <visual name="Rueda2Drcha">
+      <material name="None"/>
+      <origin rpy="-0.00000 0.00000 0.00000" xyz="-0.00000 -0.00000 -0.00000"/>
+      <geometry>
+        <mesh filename="../meshes/dae/Torus.005.dae" scale="0.20000 0.20000 0.60000"/>
+      </geometry>
+    </visual>
+    <collision>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+        <cylinder radius="0.18" length="0.15"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <mass value="2.0"/>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <inertia ixx="0.05" ixy="0" ixz="0" iyy="0.05" iyz="0" izz="0.05"/>
+    </inertial>
+  </link>
+
+  <link name="Rueda2Izq_link">
+    <visual name="Rueda2Izq">
+      <material name="None"/>
+      <origin rpy="3.14159 0.00000 0.00000" xyz="0.00000 0.00000 -0.00000"/>
+      <geometry>
+        <mesh filename="../meshes/dae/Torus.004.dae" scale="0.20000 0.20000 0.60000"/>
+      </geometry>
+    </visual>
+    <collision>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+        <cylinder radius="0.18" length="0.15"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <mass value="2.0"/>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <inertia ixx="0.05" ixy="0" ixz="0" iyy="0.05" iyz="0" izz="0.05"/>
+    </inertial>
+  </link>
+
+  <link name="Axis3_link">
+    <visual name="Axis3">
+      <material name="Material.016"/>
+      <origin rpy="0.00000 0.00000 0.00000" xyz="-0.21856 -0.23838 -0.01085"/>
+      <geometry>
+        <mesh filename="../meshes/dae/Cube.008.dae" scale="0.02500 0.25000 0.02500"/>
+      </geometry>
+    </visual>
+    <collision>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+        <box size="0.05 1.8 0.05"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <mass value="1.0"/>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <inertia ixx="0.1" ixy="0" ixz="0" iyy="0.1" iyz="0" izz="0.1"/>
+    </inertial>
+  </link>
+
+  <link name="Rueda3Drcha_link">
+    <visual name="Rueda3Drcha">
+      <material name="None"/>
+      <origin rpy="-0.00000 0.00000 0.00000" xyz="-0.00000 -0.00000 -0.00000"/>
+      <geometry>
+        <mesh filename="../meshes/dae/Torus.009.dae" scale="0.20000 0.20000 0.60000"/>
+      </geometry>
+    </visual>
+    <collision>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+        <cylinder radius="0.18" length="0.15"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <mass value="2.0"/>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <inertia ixx="0.05" ixy="0" ixz="0" iyy="0.05" iyz="0" izz="0.05"/>
+    </inertial>
+  </link>
+
+  <link name="Rueda3Izq_link">
+    <visual name="Rueda3Izq">
+      <material name="None"/>
+      <origin rpy="3.14159 0.00000 0.00000" xyz="0.00000 0.00000 -0.00000"/>
+      <geometry>
+        <mesh filename="../meshes/dae/Torus.008.dae" scale="0.20000 0.20000 0.60000"/>
+      </geometry>
+    </visual>
+    <collision>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+        <cylinder radius="0.18" length="0.15"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <mass value="2.0"/>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <inertia ixx="0.05" ixy="0" ixz="0" iyy="0.05" iyz="0" izz="0.05"/>
+    </inertial>
+  </link>
+
+  <material name="Material.006">
+    <color rgba="0.80000 0.80000 0.80000 1.00000"/>
+  </material>
+  <material name="Material.008">
+    <color rgba="0.80000 0.80000 0.80000 1.00000"/>
+  </material>
+  <material name="Material.016">
+    <color rgba="0.80000 0.80000 0.80000 1.00000"/>
+  </material>
+
+</robot>

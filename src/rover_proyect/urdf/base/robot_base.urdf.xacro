@@ -1,0 +1,92 @@
+<?xml version="1.0"?>
+<robot name="robot" xmlns:xacro="http://wiki.ros.org/xacro">
+
+  <xacro:macro name="robot_base" params="">
+    <link name="base_footprint"/>
+
+    <joint name="base_footprint_joint" type="fixed">
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <parent link="base_footprint"/>
+      <child link="Base_link"/>
+    </joint>
+
+    <link name="Base_link">
+      <visual name="Base">
+        <material name="None"/>
+        <origin rpy="0.00000 0.00000 0.00000" xyz="-0.88269 0.00000 -0.29771"/>
+        <geometry>
+          <mesh filename="package://rover_proyect/meshes/dae/Cube.042.dae" scale="1.25000 0.97696 1.00000"/>
+        </geometry>
+      </visual>
+      <collision>
+        <origin rpy="0 0 0" xyz="-0.88269 0 -0.29771"/>
+        <geometry>
+          <mesh filename="package://rover_proyect/meshes/dae/Cube.042.dae" scale="1.25000 0.97696 1.00000"/>
+        </geometry>
+      </collision>
+      <inertial>
+        <mass value="50.0"/>
+        <origin rpy="0 0 0" xyz="0.267 0 0.225"/>
+        <inertia ixx="10.0" ixy="0" ixz="0" iyy="10.0" iyz="0" izz="10.0"/>
+      </inertial>
+    </link>
+
+    <xacro:macro name="wall" params="name xyz rpy size offset">
+
+      <joint name="${name}_joint" type="fixed">
+        <origin xyz="${xyz}" rpy="${rpy}"/>
+        <parent link="Base_link"/>
+        <child link="${name}_link"/>
+      </joint>
+
+      <link name="${name}_link">
+        <visual>
+          <origin xyz="${offset}" rpy="0 0 0"/>
+          <geometry>
+            <box size="${size}"/>
+          </geometry>
+        </visual>
+
+        <collision>
+          <origin xyz="${offset}" rpy="0 0 0"/>
+          <geometry>
+            <box size="${size}"/>
+          </geometry>
+        </collision>
+
+        <inertial>
+          <mass value="0.1"/>
+          <origin xyz="0 0 0" rpy="0 0 0"/>
+          <inertia ixx="0.01" iyy="0.01" izz="0.01"
+                   ixy="0" ixz="0" iyz="0"/>
+        </inertial>
+      </link>
+
+    </xacro:macro>
+    
+    <xacro:wall name="Pared1"
+                xyz="1.01230 0 0.15044"
+                rpy="0 0 0"
+                size="0.03 1.48 0.25"
+                offset="0.48273 0 0"/>
+
+    <xacro:wall name="Pared2"
+                xyz="0.07147 0 0.15044"
+                rpy="0 0 -3.14159"
+                size="0.03 1.48 0.25"
+                offset="-0.48273 0 0"/>
+
+    <xacro:wall name="Pared3"
+                xyz="0.54692 -0.72127 0.15044"
+                rpy="0 0 1.57080"
+                size="0.03 0.92 0.25"
+                offset="0 -0.48273 0"/>
+
+    <xacro:wall name="Pared4"
+                xyz="0.54511 0.72236 0.15044"
+                rpy="0 0 -1.57080"
+                size="0.03 0.92 0.25"
+                offset="0 0.48273 0"/>
+
+  </xacro:macro>
+</robot>

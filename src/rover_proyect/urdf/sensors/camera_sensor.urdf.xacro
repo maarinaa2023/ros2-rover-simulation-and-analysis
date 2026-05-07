@@ -1,0 +1,64 @@
+<?xml version="1.0"?>
+<robot name="camera" xmlns:xacro="http://wiki.ros.org/xacro">
+
+  <xacro:macro name="camera_sensor" params="frame_prefix parent_link xyz rpy horizontal_fov video_width video_height optical_rpy">
+
+    <joint name="${frame_prefix}_camera_joint" type="fixed">
+      <origin rpy="${rpy}" xyz="${xyz}"/>
+      <parent link="${parent_link}"/>
+      <child link="${frame_prefix}_camera_frame"/>
+    </joint>
+
+    <link name="${frame_prefix}_camera_frame">
+      <visual>
+        <origin rpy="0 0 0" xyz="0 0 0"/>
+        <geometry><box size="0.05 0.05 0.05"/></geometry>
+        <material name="${frame_prefix}_camera_color">
+          <color rgba="0.0 0.0 0.8 1.0"/>
+        </material>
+      </visual>
+      <inertial>
+        <mass value="0.1"/>
+        <origin rpy="0 0 0" xyz="0 0 0"/>
+        <inertia ixx="0.001" ixy="0" ixz="0" iyy="0.001" iyz="0" izz="0.001"/>
+      </inertial>
+    </link>
+
+    <!-- Optical frame: Z apunta donde mira la cámara -->
+    <joint name="${frame_prefix}_camera_optical_joint" type="fixed">
+      <origin rpy="${optical_rpy}" xyz="0 0 0"/>
+      <parent link="${frame_prefix}_camera_frame"/>
+      <child link="${frame_prefix}_camera_optical_frame"/>
+    </joint>
+
+    <link name="${frame_prefix}_camera_optical_frame"/>
+
+    <gazebo reference="${frame_prefix}_camera_optical_frame">
+      <sensor name="${frame_prefix}_sensor" type="camera">
+        <visualize>true</visualize>
+        <update_rate>30</update_rate>
+        <topic>/${frame_prefix}/image</topic>
+        <camera>
+          <horizontal_fov>${radians(float(horizontal_fov))}</horizontal_fov>
+          <image>
+            <width>${video_width}</width>
+            <height>${video_height}</height>
+            <format>R8G8B8</format>
+          </image>
+          <clip>
+            <near>0.10</near>
+            <far>15.0</far>
+          </clip>
+          <noise>
+            <type>gaussian</type>
+            <mean>0.0</mean>
+            <stddev>0.007</stddev>
+          </noise>
+          <optical_frame_id>${frame_prefix}_camera_optical_frame</optical_frame_id>
+        </camera>
+      </sensor>
+    </gazebo>
+
+  </xacro:macro>
+
+</robot>

@@ -1,0 +1,74 @@
+controller_manager:
+  ros__parameters:
+    update_rate: 20 
+
+    rover_base_control:
+      type: diff_drive_controller/DiffDriveController
+
+    joint_state_broadcaster:
+      type: joint_state_broadcaster/JointStateBroadcaster
+
+    scara_controller:
+      type: joint_trajectory_controller/JointTrajectoryController
+
+    gripper_controller:
+      type: joint_trajectory_controller/JointTrajectoryController
+
+/**/rover_base_control:
+  ros__parameters:
+    type: diff_drive_controller/DiffDriveController
+    use_stamped_vel: false
+    use_sim_time: true
+    publish_rate: 50.0
+    right_wheel_names: ["Rueda1Drcha_joint", "Rueda2Drcha_joint", "Rueda3Drcha_joint"]
+    left_wheel_names: ["Rueda1Izq_joint", "Rueda2Izq_joint", "Rueda3Izq_joint"]
+    wheel_separation: 1.69
+    wheel_radius: 0.18
+    
+    wheel_separation_multiplier: 1.0
+    left_wheel_radius_multiplier: 1.0
+    right_wheel_radius_multiplier: 1.0
+    
+    base_frame_id: base_footprint
+    enable_odom_tf: true
+    publish_limited_velocity: true
+    
+    linear:
+      x:
+        has_velocity_limits: true
+        max_velocity: 3.0
+        has_acceleration_limits: true
+        max_acceleration: 3.0
+        
+    angular:
+      z:
+        has_velocity_limits: true
+        max_velocity: 3.0
+        has_acceleration_limits: true
+        max_acceleration: 3.0
+
+/**/scara_controller:
+  ros__parameters:
+    joints:
+      - PinzaBarra_link_joint
+      - Cylinder_link_joint
+      - CilindroPinza1_link_joint
+      - AjustaAlturaPinza_link_joint
+    command_interfaces:
+      - position
+    state_interfaces:
+      - position
+      - velocity
+    allow_nonzero_velocity_at_trajectory_end: true
+
+/**/gripper_controller:
+  ros__parameters:
+    joints:
+      - Pinza1_link_joint
+      - Pinza2_link_joint
+    command_interfaces:
+      - position
+    state_interfaces:
+      - position
+      - velocity
+    allow_nonzero_velocity_at_trajectory_end: true

@@ -1,0 +1,9 @@
+# Default initial positions for rover's ros2_control fake system
+
+initial_positions:
+  AjustaAlturaPinza_link_joint: 0
+  CilindroPinza1_link_joint: 0
+  Cylinder_link_joint: 0
+  Pinza1_link_joint: 0
+  Pinza2_link_joint: 0
+  PinzaBarra_link_joint: 0

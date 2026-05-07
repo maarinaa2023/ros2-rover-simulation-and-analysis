@@ -1,0 +1,51 @@
+<?xml version="1.0"?>
+<robot name="rover" xmlns:xacro="http://www.ros.org/xacro">
+
+  <xacro:include filename="$(find rover_proyect)/urdf/base/robot_base.urdf.xacro"/>
+  <xacro:include filename="$(find rover_proyect)/urdf/wheels/wheels.urdf.xacro"/>
+  <xacro:include filename="$(find rover_proyect)/urdf/arm/scara.urdf.xacro"/>
+  <xacro:include filename="$(find rover_proyect)/urdf/arm/gripper.urdf.xacro"/>
+  <xacro:include filename="$(find rover_proyect)/urdf/sensors/camera_sensor.urdf.xacro"/>
+  <xacro:include filename="$(find rover_proyect)/urdf/sensors/imu_sensor.urdf.xacro"/>
+
+
+  <xacro:robot_base/>
+  <xacro:wheels parent="Base_link"/>
+  <xacro:scara parent="Base_link"/>
+  <xacro:gripper parent="AjustaAlturaPinza_link"/>
+
+  <xacro:imu_sensor
+    prefix="imu"
+    topic="/imu/data"
+    parent_link="Base_link"
+    xyz="-0.2 0.4 0.55"
+    rpy="0 0 0"/>
+
+  <!-- Cámara frontal -->
+  <xacro:camera_sensor
+    frame_prefix="front"
+    parent_link="Base_link"
+    xyz="-0.85 -0.35 0.05"
+    rpy="0 0 0"
+    horizontal_fov="60"
+    video_width="640"
+    video_height="480"
+    optical_rpy="3.14 3.14 0"/>
+
+  <!-- Cámara del brazo: eslabón final -->
+  <xacro:camera_sensor
+    frame_prefix="arm"
+    parent_link="CilindroPinza2_link"
+    xyz="0.0 0.0 -0.05"
+    rpy="0 0 0"
+    horizontal_fov="60"
+    video_width="640"
+    video_height="480"
+    optical_rpy="0 1.57 0"/>
+
+  <xacro:include filename="$(find rover_proyect)/urdf/ros2_control.urdf.xacro"/>
+  <xacro:arg name="config_controllers" default="$(find rover_proyect)/config/rover_controllers.yaml"/>
+  <xacro:arg name="update_rate" default="20"/>
+  <xacro:ros2_control/>
+
+</robot>
