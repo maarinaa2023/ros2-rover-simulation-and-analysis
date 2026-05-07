@@ -110,12 +110,12 @@ Below are some images that illustrate the points made:
 
 <img width="1087" height="848" alt="imagen" src="https://github.com/user-attachments/assets/428719b7-7e11-4f2b-b5a6-049a290ea24e" />
 
-<img width="469" height="338" alt="Captura desde 2026-05-07 09-58-12" src="https://github.com/user-attachments/assets/491c557b-20b4-48f3-8f0b-5c2c7c4225d7" />
+<img width="%48" height="400" alt="Captura desde 2026-05-07 09-58-12" src="https://github.com/user-attachments/assets/491c557b-20b4-48f3-8f0b-5c2c7c4225d7" />
 
-<img width="477" height="430" alt="Captura desde 2026-05-07 10-53-02" src="https://github.com/user-attachments/assets/c05a1320-50b2-4f52-a4f4-d6db985f0323" />
+<img width="%48" height="400" alt="Captura desde 2026-05-07 10-53-02" src="https://github.com/user-attachments/assets/c05a1320-50b2-4f52-a4f4-d6db985f0323" />
 
-<img width="379" height="365" alt="Screenshot from 2026-05-07 15-54-16" src="https://github.com/user-attachments/assets/7a731dab-72a0-47d1-870e-d724d6da1ae9" />
+<img width="%48" height="365" alt="Screenshot from 2026-05-07 15-54-16" src="https://github.com/user-attachments/assets/7a731dab-72a0-47d1-870e-d724d6da1ae9" />
 
-<img width="379" height="365" alt="Screenshot from 2026-05-07 15-54-31" src="https://github.com/user-attachments/assets/20af6e29-2924-48f2-8f56-c262ff7a244a" />
+<img width="%48" height="365" alt="Screenshot from 2026-05-07 15-54-31" src="https://github.com/user-attachments/assets/20af6e29-2924-48f2-8f56-c262ff7a244a" />
 
 
