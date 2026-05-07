@@ -1,5 +1,3 @@
-<img width="1024" height="763" alt="imagen" src="https://github.com/user-attachments/assets/54e14df1-e712-4572-bfc1-a10254484d4f" /># ROS 2 Rover Simulation and Telemetry Analysis
-
 ## 1. Custom Rover Design
 
 The rover was fully designed from scratch using Blender as a modular mobile robotics platform intended for physics simulation environments such as PyBullet and Gazebo. The main objective during the design process was to create a lightweight but realistic rover capable of supporting articulated motion, wheel-based locomotion and future robotic manipulation tasks.
