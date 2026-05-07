@@ -1,4 +1,4 @@
-# ROS 2 Rover Simulation and Telemetry Analysis
+<img width="1024" height="763" alt="imagen" src="https://github.com/user-attachments/assets/54e14df1-e712-4572-bfc1-a10254484d4f" /># ROS 2 Rover Simulation and Telemetry Analysis
 
 ## 1. Custom Rover Design
 
@@ -11,7 +11,6 @@ The rover structure is composed of several independent rigid bodies connected th
 Special attention was given to the hierarchy and pivot placement of each component. Origins and rotation axes were manually adjusted in Blender to ensure proper joint behavior once exported to URDF-compatible simulation environments. This greatly simplifies integration into robotics frameworks and prevents common issues such as incorrect wheel rotation or unstable physics interactions.
 
 <img width="803" height="743" alt="imagen" src="https://github.com/user-attachments/assets/d9ecc4c4-e3db-4241-9df8-569216afda47" />
-
 
 
 The rover includes:
@@ -81,3 +80,29 @@ RViz was also used extensively during development to visualize:
 * IMU orientation and telemetry
 
 This evolution allowed the rover to operate in a much more realistic simulation workflow similar to those commonly used in modern robotics research and autonomous exploration systems.
+
+<img width="1360" height="1046" alt="imagen" src="https://github.com/user-attachments/assets/91842631-53b3-4a44-b2d8-3a3cc354ffbb" />
+
+<img width="1360" height="1046" alt="imagen" src="https://github.com/user-attachments/assets/f8529438-21b9-4777-a371-d8855274370c" />
+
+### Diving further into this section
+
+As I mentioned, we tested this model in an environment that bears a slight resemblance to Mars, the urjc_excavation_world, and in this environment we carried out a sequence of actions such as picking up the green bucket and placing it in the back of the car, then moving forward and picking up the blue bucket at a certain angle, and positioning it on top of the red bucket. 
+The results obtained are as follows: 
+
+<img width="1024" height="763" alt="imagen" src="https://github.com/user-attachments/assets/73acbffd-4981-4ee5-bcbc-45dc0e64f1b5" />
+
+
+**1. Motion Analysis (Wheel Position vs. Time) :** 
+**0s – 250s:** The robot remains largely stationary or performs very fine adjustment movements. The positions of the wheel joints remain close to 0 rad.
+**250s – 300s:** The first significant movement is observed. The wheels (particularly Wheel1, Wheel2 and Wheel3) begin a continuous rotation towards negative values, indicating constant linear movement.
+**400s – 450s:** There is a fluctuation in the position of the wheels coinciding with precision manoeuvres. It is likely that at this point the robot was positioning itself to interact with the cubes. 
+**500s onwards:** A very steep slope is recorded on the position graph (reaching -60 rad), suggesting movement at a constant speed towards the final target or return zone. 
+
+**2. Dynamics and Acceleration (IMU) :** 
+The Linear Acceleration graph shows a constant value on the Z-axis (~9.8 m/s²), corresponding to the force of gravity acting on the sensor. 
+The peaks detected on the X and Y axes (around 250, 320, 350 and 520 seconds) coincide exactly with the start and stop of the wheels. These peaks represent the inertia of starting and braking, as well as possible vibrations caused by the wheels’ contact with the simulation floor.
+
+**3. Energy Efficiency (Power Consumption vs. Time) :** The third graph shows the Potential Power Consumption calculated as _|velocity \times force|_. It can be seen that the total power consumption (white line) has peaks of high energy demand just as the cmd_vel.vx signal (red dotted line) changes abruptly. 
+Between seconds 250 and 500, power consumption is intermittent and high, reflecting the motors’ effort to move the robot’s weight along with the load (the cubes) and perform turning manoeuvres that require greater torque.
+
